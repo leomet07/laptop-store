@@ -35,7 +35,7 @@ nav ul {
 	justify-content: space-around;
 	list-style: none;
 }
-.link {
+a {
 	color: #5f5f79;
 	font-size: 18px;
 	text-decoration: none;
