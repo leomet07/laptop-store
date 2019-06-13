@@ -1,11 +1,17 @@
+let currentusercart = [];
+
 function buycurrent() {
 	console.log("run buy proccess");
+	let currentitem = myPix[thePic];
+	console.log(currentitem);
+	currentusercart.push(currentitem);
 }
 window.onload = function() {
 	dotdraw();
 	document.getElementById("cart").addEventListener("click", function(event) {
 		event.preventDefault();
 		console.log("veiwcart");
+		console.log(currentusercart);
 	});
 
 	document.getElementById("prevLink").onclick = processPrevious;
@@ -15,17 +21,17 @@ window.onload = function() {
 var thePic = 0;
 var myPix = [
 	{
-		text: "Matebook",
+		name: "Matebook",
 		url: "img/matebook.png",
 		desc: "The new 14 inch bezeless display oferring a 4k display with touch screen."
 	},
 	{
-		text: "Razer stealth",
+		name: "Razer stealth",
 		url: "img/razer.png",
 		desc: "GAMER"
 	},
 	{
-		text: "Macbook",
+		name: "Macbook",
 		url: "img/macbook.png",
 		desc: "oveepricedmacbook"
 	}
@@ -36,10 +42,7 @@ function processPrevious() {
 		thePic = myPix.length;
 	}
 	thePic--;
-	document.getElementById("mainimg").src = myPix[thePic].url;
-	document.getElementById("name").innerHTML = myPix[thePic].text;
-	document.getElementById("spec").innerHTML = myPix[thePic].desc;
-	dotdraw();
+	update();
 	//return false;
 }
 
@@ -48,11 +51,15 @@ function processNext() {
 	if (thePic == myPix.length) {
 		thePic = 0;
 	}
+	update();
+	//return false;
+}
+
+function update() {
 	document.getElementById("mainimg").src = myPix[thePic].url;
-	document.getElementById("name").innerHTML = myPix[thePic].text;
+	document.getElementById("name").innerHTML = myPix[thePic].name;
 	document.getElementById("spec").innerHTML = myPix[thePic].desc;
 	dotdraw();
-	//return false;
 }
 function dotdraw() {
 	//resseting div
@@ -78,3 +85,18 @@ function dotdraw() {
 		document.getElementById("dotdiv").innerHTML += `<img src="img/dot.svg" alt="">`;
 	}
 }
+
+window.addEventListener("keydown", function(e) {
+	console.log(e.which);
+
+	if (e.which == 39 || e.keyCode == 39) {
+		processNext();
+	}
+	if (e.which == 37 || e.keyCode == 37) {
+		processNext();
+	}
+
+	if (e.which == 13 || e.keyCode == 13) {
+		buycurrent();
+	}
+});
